@@ -67,7 +67,7 @@ test.prototype.initFirebase = function() {
 test.prototype.loadMessages = function() {
   // TODO(DEVELOPER): Load and listens for new messages.
   // Reference to the /messages/ database path.
-  this.messagesRef = this.database.ref('normal-chat');
+  this.messagesRef = this.database.ref('awesome-chat');
   // Make sure we remove all previous listeners.
   this.messagesRef.off();
 
