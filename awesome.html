@@ -67,7 +67,7 @@
 		<header class="mdl-layout__header mdl-color-text--white mdl-color--light-orange-700">
 			<div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
 				<div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-					<h3><i class="material-icons">chat_bubble_outline</i>Awesome Chat</h3>
+					<h3><i class="material-icons">chat_bubble_outline</i>Multiple Chat</h3>
 				</div>
 				<div id="user-container">
 					<div hidden id="user-pic"></div>
@@ -88,87 +88,86 @@
 			<br/><br/><br/><br/>
 			<a href="index.html">Normal</a>
 			<a href="awesome.html">Awesome</a>
-			<a href="#">Stupid</a>
+			<a href="stupid.html">Stupid</a>
 			<a href="#">General</a>
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-				<br/><br/>&times;</a>
-			</div>
-
-			<div>
-				<br/><br/><br/><br/>
-				<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-			</div>
-
-			<div id="main">
-				<h2>awesome</h2>
-				<main class="mdl-layout__content mdl-color--grey-100">
-					<div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
-
-						<!-- Messages container -->
-						<div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
-							<div class="mdl-card__supporting-text mdl-color-text--grey-600">
-								<div id="messages">
-									<span id="message-filler"></span>
-								</div>
-								<form id="message-form" action="#">
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-										<input class="mdl-textfield__input" type="text" id="message">
-										<label class="mdl-textfield__label" for="message">Message...</label>
-									</div>
-									<button id="submit" disabled type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-										Send
-									</button>
-								</form>
-								<form id="image-form" action="#">
-									<input id="mediaCapture" type="file" accept="image/*,capture=camera">
-									<button id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
-										<i class="material-icons">image</i>
-									</button>
-								</form>
-							</div>
-						</div>
-
-						<div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
-							<div class="mdl-snackbar__text"></div>
-							<button class="mdl-snackbar__action" type="button"></button>
-						</div>
-
-					</div>
-				</main>
-			</div>
-
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><br/><br/>&times;</a>
 		</div>
 
-		<!-- Firebase -->
-<!-- ***********************************************************************************************************************
-     * TODO(DEVELOPER): Paste the initialization snippet from: Firebase Console > Overview > Add Firebase to your web app. *
-     *********************************************************************************************************************** -->
-     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-     <script>
-  // Initialize Firebase
-  var config = {
-  	apiKey: "AIzaSyAppwNKejQosWyqUCaM-J9dKZCauBsxfEE",
-  	authDomain: "slack-chat-js.firebaseapp.com",
-  	databaseURL: "https://slack-chat-js.firebaseio.com",
-  	storageBucket: "slack-chat-js.appspot.com",
-  	messagingSenderId: "982454488608"
-  };
-  firebase.initializeApp(config);
-</script>
-<script src="scripts/awesome.js"></script>
+		<div>
+			<br/><br/><br/><br/>
+			<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+		</div>
+
+		<!-- message box -->
+		<main class="mdl-layout__content mdl-color--grey-100" id="main">
+			<div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
+				<div class="container">
+					<h2>Awesome Chat</h2>
+					<br/>
+				</div>
+
+				<!-- Messages container -->
+				<div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
+					<div class="mdl-card__supporting-text mdl-color-text--grey-600">
+						<div id="messages">
+							<span id="message-filler"></span>
+						</div>
+						<form id="message-form" action="#">
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<input class="mdl-textfield__input" type="text" id="message">
+								<label class="mdl-textfield__label" for="message">Message...</label>
+							</div>
+							<button id="submit" disabled type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+								Send
+							</button>
+						</form>
+						<form id="image-form" action="#">
+							<input id="mediaCapture" type="file" accept="image/*,capture=camera">
+							<button id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
+								<i class="material-icons">image</i>
+							</button>
+						</form>
+					</div>
+				</div>
+
+				<div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
+					<div class="mdl-snackbar__text"></div>
+					<button class="mdl-snackbar__action" type="button"></button>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Firebase -->
+	<!-- ***********************************************************************************************************************
+	 * TODO(DEVELOPER): Paste the initialization snippet from: Firebase Console > Overview > Add Firebase to your web app. *
+	 *********************************************************************************************************************** -->
+	 <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+	 <script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyAppwNKejQosWyqUCaM-J9dKZCauBsxfEE",
+			authDomain: "slack-chat-js.firebaseapp.com",
+			databaseURL: "https://slack-chat-js.firebaseio.com",
+			storageBucket: "slack-chat-js.appspot.com",
+			messagingSenderId: "982454488608"
+		};
+		firebase.initializeApp(config);
+	</script>
+	<script src="scripts/awesome.js"></script>
 
 
-<script>
-	function openNav() {
-		document.getElementById("mySidenav").style.width = "250px";
-		document.getElementById("main").style.marginLeft = "250px";
-	}
+	<script>
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "250px";
+			document.getElementById("main").style.marginLeft = "250px";
+		}
 
-	function closeNav() {
-		document.getElementById("mySidenav").style.width = "0";
-		document.getElementById("main").style.marginLeft= "0";
-	}
-</script>
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+		}
+	</script>
 
 </body>
 </html>

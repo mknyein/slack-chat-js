@@ -117,8 +117,6 @@ main, #messages-card {
 }
 .mdl-card {
   min-height: 0;
-}
-.mdl-card {
   background: linear-gradient(white, #f9f9f9);
   justify-content: space-between;
 }
@@ -233,7 +231,6 @@ main, #messages-card {
 
 #main {
     transition: margin-left .5s;
-    padding: 16px;
 }
 /*
 @media screen and (max-height: 450px) {
