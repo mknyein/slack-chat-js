@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
+ 'use strict';
 
 // Initializes test.
 function test() {
@@ -143,15 +143,15 @@ test.prototype.saveImageMessage = function(event) {
 
       // Upload the image to Firebase Storage.
       this.storage.ref(currentUser.uid + '/' + Date.now() + '/' + file.name)
-          .put(file, {contentType: file.type})
-          .then(function(snapshot) {
+      .put(file, {contentType: file.type})
+      .then(function(snapshot) {
             // Get the file's Storage URI and update the chat message placeholder.
             var filePath = snapshot.metadata.fullPath;
             data.update({imageUrl: this.storage.ref(filePath).toString()});
           }.bind(this)).catch(function(error) {
-        console.error('There was an error uploading a file to Firebase Storage:', error);
-      });
-    }.bind(this));
+            console.error('There was an error uploading a file to Firebase Storage:', error);
+          });
+        }.bind(this));
   }
 
 };
@@ -227,11 +227,11 @@ test.resetMaterialTextfield = function(element) {
 
 // Template for messages.
 test.MESSAGE_TEMPLATE =
-    '<div class="message-container">' +
-      '<div class="spacing"><div class="pic"></div></div>' +
-      '<div class="message"></div>' +
-      '<div class="name"></div>' +
-    '</div>';
+'<div class="message-container">' +
+'<div class="spacing"><div class="pic"></div></div>' +
+'<div class="message"></div>' +
+'<div class="name"></div>' +
+'</div>';
 
 // A loading image URL.
 test.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
@@ -239,36 +239,115 @@ test.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 // Displays a Message in the UI.
 test.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
   var div = document.getElementById(key);
-  // If an element for that message does not exists yet we create it.
-  if (!div) {
-    var container = document.createElement('div');
-    container.innerHTML = test.MESSAGE_TEMPLATE;
-    div = container.firstChild;
-    div.setAttribute('id', key);
-    this.messageList.appendChild(div);
-  }
-  if (picUrl) {
-    div.querySelector('.pic').style.backgroundImage = 'url(' + picUrl + ')';
-  }
-  div.querySelector('.name').textContent = name;
-  var messageElement = div.querySelector('.message');
-  if (text) { // If the message is text.
-    messageElement.textContent = text;
-    // Replace all line breaks by <br>.
-    messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
-  } else if (imageUri) { // If the message is an image.
-    var image = document.createElement('img');
-    image.addEventListener('load', function() {
-      this.messageList.scrollTop = this.messageList.scrollHeight;
-    }.bind(this));
-    this.setImageUrl(imageUri, image);
-    messageElement.innerHTML = '';
-    messageElement.appendChild(image);
-  }
-  // Show the card fading-in.
-  setTimeout(function() {div.classList.add('visible')}, 1);
-  this.messageList.scrollTop = this.messageList.scrollHeight;
-  this.messageInput.focus();
+// If an element for that message does not exists yet we create it.
+if (!div) {
+        var container = document.createElement('div');
+        container.innerHTML = test.MESSAGE_TEMPLATE;
+
+        div = container.firstChild;
+        div.setAttribute('id', key);
+        var db = this.messagesRef.child(key);
+
+        //delete btn 
+        var delbtn = document.createElement('button');
+        delbtn.innerHTML = 'delete';
+        delbtn.id = key+'del';
+        delbtn.onclick = function(){
+            db.remove();
+            document.getElementById(key).remove();
+        }
+
+        //update btn 
+        var updbtn = document.createElement('button');
+        updbtn.innerHTML = 'update';
+        updbtn.id = key+'upd';
+        updbtn.onclick = function(){
+            var x = document.createElement("FORM");
+            x.setAttribute("id", "myForm");
+            div.appendChild(x);
+
+            var y = document.createElement("INPUT");
+            y.setAttribute("type", "text");
+            y.id = key+ "text";
+
+            var submitbtn = document.createElement("button");
+            submitbtn.innerHTML = 'submit';
+            submitbtn.id = key+"sub";
+            var cancelbtn = document.createElement("button");
+            cancelbtn.innerHTML = 'cancel';
+            cancelbtn.id = key+"can";
+
+
+            db.on("value", function(snapshot) {
+                y.setAttribute("value", snapshot.val().text);
+                console.log(snapshot.val());
+            }, function (error) {
+                console.log("Error: " + error.code);
+            });
+
+            document.getElementById(key+'msg').style.visibility = "hidden";
+            document.getElementById(key+'upd').style.visibility = "hidden";
+            document.getElementById(key+'del').style.visibility = "hidden";
+
+            cancelbtn.onclick = function () {
+                // body...
+                alert('cancel');
+                document.getElementById('myForm').style.visibility = "hidden";
+                document.getElementById(key+'text').style.visibility = "hidden";
+                document.getElementById(key+'sub').style.visibility = "hidden";
+                document.getElementById(key+'can').style.visibility = "hidden";
+
+                document.getElementById(key+'msg').style.visibility = "visible";
+                document.getElementById(key+'upd').style.visibility = "visible";
+                document.getElementById(key+'del').style.visibility = "visible";
+            }//cancelbtn function end
+
+            submitbtn.onclick = function () {
+            // body...
+                alert('submit');
+                document.getElementById('myForm').style.visibility = "hidden";
+                document.getElementById(key+'text').style.visibility = "hidden";
+                document.getElementById(key+'sub').style.visibility = "hidden";
+                document.getElementById(key+'can').style.visibility = "hidden";
+
+                document.getElementById(key+'msg').style.visibility = "visible";
+                document.getElementById(key+'upd').style.visibility = "visible";
+                document.getElementById(key+'del').style.visibility = "visible";
+            }//submitbtn function end
+
+            document.getElementById("myForm").appendChild(y);
+            document.getElementById("myForm").appendChild(submitbtn);
+            document.getElementById("myForm").appendChild(cancelbtn);
+        }//update btn function end
+
+        div.appendChild(updbtn);
+        div.appendChild(delbtn);
+        this.messageList.appendChild(div);
+    }//div function end
+/div function end
+
+if (picUrl) {
+  div.querySelector('.pic').style.backgroundImage = 'url(' + picUrl + ')';
+}
+div.querySelector('.name').textContent = name;
+var messageElement = div.querySelector('.message');
+if (text) { // If the message is text.
+  messageElement.textContent = text;
+// Replace all line breaks by <br>.
+messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
+} else if (imageUri) { // If the message is an image.
+  var image = document.createElement('img');
+  image.addEventListener('load', function() {
+    this.messageList.scrollTop = this.messageList.scrollHeight;
+  }.bind(this));
+  this.setImageUrl(imageUri, image);
+  messageElement.innerHTML = '';
+  messageElement.appendChild(image);
+}
+// Show the card fading-in.
+setTimeout(function() {div.classList.add('visible')}, 1);
+this.messageList.scrollTop = this.messageList.scrollHeight;
+this.messageInput.focus();
 };
 
 // Enables or disables the submit button depending on the values of the input
@@ -285,14 +364,14 @@ test.prototype.toggleButton = function() {
 test.prototype.checkSetup = function() {
   if (!window.firebase || !(firebase.app instanceof Function) || !window.config) {
     window.alert('You have not configured and imported the Firebase SDK. ' +
-        'Make sure you go through the codelab setup instructions.');
+      'Make sure you go through the codelab setup instructions.');
   } else if (config.storageBucket === '') {
     window.alert('Your Firebase Storage bucket has not been enabled. Sorry about that. This is ' +
-        'actually a Firebase bug that occurs rarely. ' +
-        'Please go and re-generate the Firebase initialisation snippet (step 4 of the codelab) ' +
-        'and make sure the storageBucket attribute is not empty. ' +
-        'You may also need to visit the Storage tab and paste the name of your bucket which is ' +
-        'displayed there.');
+      'actually a Firebase bug that occurs rarely. ' +
+      'Please go and re-generate the Firebase initialisation snippet (step 4 of the codelab) ' +
+      'and make sure the storageBucket attribute is not empty. ' +
+      'You may also need to visit the Storage tab and paste the name of your bucket which is ' +
+      'displayed there.');
   }
 };
 

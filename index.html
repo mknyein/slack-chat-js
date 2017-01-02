@@ -87,11 +87,13 @@
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <div id="mySidenav" class="sidenav">
             <br/><br/><br/><br/>
-            <a href="index.html">Normal</a>
-            <a href="awesome.html">Awesome</a>
-            <a href="stupid.html">Stupid</a>
-            <a href="#">General</a>
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><br/><br/>&times;</a>
+            <ul>
+                <li><button type="button" id="normal" style="font-size: 25px!important; background:none!important; border:none; padding:0!important; font: inherit; cursor: pointer;" onclick="document.getElementById('chatbox').innerHTML= 'Normal Chat';">Normal</button></li>
+                <li><button type="button" id="awesome" style="font-size: 25px!important; background:none!important; border:none; padding:0!important; font: inherit; cursor: pointer;" onclick="document.getElementById('chatbox').innerHTML= 'Awesome Chat';">Awesome</button></li>
+                <li><button type="button" id="normal" style="font-size: 25px!important; background:none!important; border:none; padding:0!important; font: inherit; cursor: pointer;" onclick="document.getElementById('chatbox').innerHTML= 'Insane Chat';">Insane</button></li>
+                <li><button type="button" id="awesome" style="font-size: 25px!important; background:none!important; border:none; padding:0!important; font: inherit; cursor: pointer;" onclick="document.getElementById('chatbox').innerHTML= 'Stupid Chat';">Stupid</button></li>
+            </ul>
         </div>
 
         <div>
@@ -103,7 +105,7 @@
         <main class="mdl-layout__content mdl-color--grey-100" id="main">
             <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
                 <div class="container">
-                    <h2>Normal Chat</h2>
+                    <h2 id="chatbox">Normal Chat</h2>
                     <br/>
                 </div>
 
