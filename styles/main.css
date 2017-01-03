@@ -163,7 +163,7 @@ main, #messages-card {
 #mediaCapture {
   display: none;
 }
-@media screen and (max-width: 610px) {
+/*@media screen and (max-width: 610px) {
   header {
     height: 113px;
     padding-bottom: 80px !important;
@@ -181,7 +181,7 @@ main, #messages-card {
     height: 33px;
     background-size: 33px;
   }
-}
+}*/
 .mdl-textfield__label:after {
   background-color: #0288D1;
 }

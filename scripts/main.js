@@ -65,10 +65,22 @@ test.prototype.initFirebase = function() {
 
 // Loads chat messages history and listens for upcoming ones.
 test.prototype.loadMessages = function() {
+    alert('load message');
     // TODO(DEVELOPER): Load and listens for new messages.
     // Reference to the /messages/ database path.
     
-    this.messagesRef = this.database.ref('normal-chat');
+    // console.log(chat.innerHTML
+    // var chat = document.getElementById('chatbox').innerHTML;
+    // if(chat === "Normal Chat"){
+    // this.messagesRef = this.database.ref('normal-chat');
+    // }else if(chat === "Awesome Chat"){
+    // this.messagesRef = this.database.ref('awesome-chat');
+    // }else if(chat === "Insane Chat"){
+    // this.messagesRef = this.database.ref('insain-chat');
+    // }else {
+        this.messagesRef = this.database.ref('stupid-chat');
+    // }
+
     // Make sure we remove all previous listeners.
     this.messagesRef.off();
 
@@ -78,6 +90,7 @@ test.prototype.loadMessages = function() {
         this.displayMessage(data.key, val.name, val.text, val.photoUrl, val.imageUrl);
     }.bind(this);
     this.messagesRef.limitToLast(12).on('child_added', setMessage);
+    this.messagesRef.limitToLast(12).on('child_removed', setMessage);
     this.messagesRef.limitToLast(12).on('child_changed', setMessage);
 };//loadMessages function end
 
@@ -174,7 +187,7 @@ test.prototype.signOut = function() {
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 test.prototype.onAuthStateChanged = function(user) {
-    // alert('on auth state change');
+    alert('on auth state change');
     if (user) { // User is signed in!
         // Get profile pic and user's name from the Firebase user object.
         var profilePicUrl = user.photoURL; // Only change these two lines!
@@ -240,7 +253,7 @@ test.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 
 // Displays a Message in the UI.
 test.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
-    // alert('display message');
+    alert('display message');
     var div = document.getElementById(key);
     // If an element for that message does not exists yet we create it.
     if (!div) {
@@ -258,6 +271,7 @@ test.prototype.displayMessage = function(key, name, text, picUrl, imageUri) {
         delbtn.onclick = function(){
             db.remove();
             document.getElementById(key).remove();
+            
         }
 
         //update btn 
